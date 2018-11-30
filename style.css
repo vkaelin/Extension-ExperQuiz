@@ -1,0 +1,61 @@
+/* Form */
+#sendScore {
+  margin: 16px 0;
+  display: flex;
+  justify-content: center;
+}
+
+#q {
+  padding: 16px;
+}
+
+#sendScore button,
+.replay {
+  padding: 16px;
+  background: #FF3B61;
+  color: #fff;
+  border: none;
+  transition: all .5s;
+}
+
+#sendScore button:hover,
+.replay:hover {
+  background: #CC082E;
+  color: #fff;
+}
+
+.replay {
+  display: inline-block;
+  margin: 16px 0 0 50%;
+  transform: translateX(-50%);
+}
+
+.disabled {
+  display: none !important;
+}
+
+
+/* Liste des Scores */
+.list-scores {
+  margin: 16px 32px;
+  padding: 0;
+}
+
+.list-scores li {
+  padding: 8px;
+  background: #FCEBEA;
+}
+
+.list-scores li:nth-child(2n) {
+  background: #F9ACAA;
+}
+
+
+/* Bouton Reset Storage */
+.reset-storage {
+  height: 15px;
+  background: #D4D8DE;
+  border: 0;
+  position: absolute;
+  right: 0;
+}
