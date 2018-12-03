@@ -3,7 +3,7 @@ var style = document.createElement('link');
 style.rel = 'stylesheet';
 style.type = 'text/css';
 style.href = chrome.extension.getURL('style.css');
-(document.head||document.documentElement).appendChild(style);
+(document.head || document.documentElement).appendChild(style);
 
 // Score
 var actualScore = document.querySelector('.brief-card.score strong');
@@ -31,13 +31,13 @@ function addForm(scoreText) {
   form.appendChild(input);
   form.appendChild(btn);
 
-  form.addEventListener('submit', function(e) { // envoi du formulaire
+  form.addEventListener('submit', function (e) { // envoi du formulaire
     e.preventDefault();
-    if(input.value !== null && input.value !== "") { // si le prénom n'est pas vide
-      if(localStorage[actualQuizz]) { // A partir du 2ème score
-        localStorage[actualQuizz] += (',' + scoreText + '- ' +  input.value);
+    if (input.value !== null && input.value !== "") { // si le prénom n'est pas vide
+      if (localStorage[actualQuizz]) { // A partir du 2ème score
+        localStorage[actualQuizz] += (',' + scoreText + '- ' + input.value);
       } else { // 1er score
-        localStorage[actualQuizz] = (scoreText + '- ' +  input.value);
+        localStorage[actualQuizz] = (scoreText + '- ' + input.value);
       }
     }
     console.log(input.value + '-' + scoreText);
@@ -53,14 +53,18 @@ function createReplayBtn(container, form) {
   var replayBtn = document.createElement('a');
   replayBtn.className = 'replay';
   replayBtn.textContent = 'Rejouer';
-  replayBtn.setAttribute('href', 'http://www.experquiz.com/xq/quizzetml2018siteweb');
+  if (actualQuizz === 'Coder un site Web') {
+    replayBtn.setAttribute('href', 'http://www.experquiz.com/xq/portesOuvertes');
+  } else {
+    replayBtn.setAttribute('href', 'http://www.experquiz.com/xq/quizzetml2018siteweb');
+  }
   container.insertBefore(replayBtn, form);
 }
 
 
 function drawScores() {
-  if(!localStorage[actualQuizz])
-	  return;
+  if (!localStorage[actualQuizz])
+    return;
   removeOldScores();
   var container = document.querySelector('.pqs-list');
   var title = document.createElement('h2');
@@ -83,21 +87,21 @@ function drawScores() {
 function removeOldScores() {
   var l = document.querySelector('.list-scores');
   var t = document.querySelector('.scores-title');
-  if(l) {
+  if (l) {
     l.parentNode.removeChild(l);
     t.parentNode.removeChild(t);
-  } 
+  }
 }
 
 
 /* Bouton caché pour reset le localStorage */
 function addHiddenBtn() {
- var resetStorageBtn = document.createElement('button');
- resetStorageBtn.className = 'reset-storage';
- resetStorageBtn.addEventListener('click', function() {
-   console.log('RESET LOCAL STORAGE');
-   localStorage.clear();
- })
- var body = document.querySelector('body');
- body.appendChild(resetStorageBtn);
+  var resetStorageBtn = document.createElement('button');
+  resetStorageBtn.className = 'reset-storage';
+  resetStorageBtn.addEventListener('click', function () {
+    console.log('RESET LOCAL STORAGE');
+    localStorage.clear();
+  })
+  var body = document.querySelector('body');
+  body.appendChild(resetStorageBtn);
 }

@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Portes Ouvertes ETML 2018",
   "description": "Ajoute le score du visiteur dans une liste des meilleurs scores",
-  "version": "1.0",
+  "version": "2.0",
   "author": "Valentin Kaelin",
   "browser_action": {
     "default_icon": "img/icon.png"
