@@ -7,10 +7,12 @@ style.href = chrome.extension.getURL('style.css');
 
 // Score
 var actualScore = document.querySelector('.brief-card.score strong');
+var actualQuizz = document.querySelector('h1');
 
 // Si le score existe
 if (actualScore) {
   var scoreText = actualScore.textContent.split('/')[0];
+  actualQuizz = actualQuizz.textContent.trim();
   addForm(scoreText);
   drawScores();
   addHiddenBtn();
@@ -32,10 +34,10 @@ function addForm(scoreText) {
   form.addEventListener('submit', function(e) { // envoi du formulaire
     e.preventDefault();
     if(input.value !== null && input.value !== "") { // si le prénom n'est pas vide
-      if(localStorage["bestScores"]) { // A partir du 2ème score
-        localStorage["bestScores"] += (',' + scoreText + '- ' +  input.value);
+      if(localStorage[actualQuizz]) { // A partir du 2ème score
+        localStorage[actualQuizz] += (',' + scoreText + '- ' +  input.value);
       } else { // 1er score
-        localStorage["bestScores"] = (scoreText + '- ' +  input.value);
+        localStorage[actualQuizz] = (scoreText + '- ' +  input.value);
       }
     }
     console.log(input.value + '-' + scoreText);
@@ -57,7 +59,7 @@ function createReplayBtn(container, form) {
 
 
 function drawScores() {
-  if(!localStorage["bestScores"])
+  if(!localStorage[actualQuizz])
 	  return;
   removeOldScores();
   var container = document.querySelector('.pqs-list');
@@ -68,7 +70,7 @@ function drawScores() {
   listScores.className = 'list-scores';
   container.appendChild(title);
   container.appendChild(listScores);
-  var allLocalScores = localStorage["bestScores"].split(',');
+  var allLocalScores = localStorage[actualQuizz].split(',');
   allLocalScores.sort().reverse();
   allLocalScores.forEach(e => {
     var li = document.createElement('li');
